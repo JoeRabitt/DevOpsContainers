@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+ db:
+    container_name: devops-database
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: devops
+    volumes:
+      - devops-db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+ pgadmin:
+    container_name: devops-admin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: SuperSecret
+    ports:
+      - 80:80
+
+volumes:
+ devops-db:
+    driver: local
